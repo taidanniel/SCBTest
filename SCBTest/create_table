@@ -1,0 +1,37 @@
+create table user_profile
+(
+username varchar(30) PRIMARY KEY,
+name varchar(30),
+surename varchar(30),
+password varchar(100),
+enabled boolean NOT NULL DEFAULT TRUE ,
+date_of_birth date
+);
+
+create table user_roles (
+  user_role_id SERIAL PRIMARY KEY,
+  username varchar(30) NOT NULL,
+  role varchar(20) NOT NULL,
+  UNIQUE (username,role),
+  FOREIGN KEY (username) REFERENCES user_profile (username)
+);
+
+create table user_orders
+(
+id SERIAL PRIMARY KEY,
+username varchar(30),
+book_id  Integer ,
+book_name varchar(255),
+book_author varchar(100),
+book_price NUMERIC(11,2)
+);
+
+INSERT INTO user_profile VALUES
+('nat',
+ 'Nattapat',
+ 'Wongbiasuj',
+ '$2a$10$5e3dB36HeRcozRgp8xQfw.tfD3Qsut8xu/NT9g/DSpVKg9Kzuitrq'
+);
+
+INSERT INTO user_roles (username, role) VALUES ('nat', 'ROLE_USER');
+
